@@ -16,9 +16,7 @@
 <body>
 <div id="app" v-if="meetup" v-cloak>
 
-<!--    <div style="background-image: url(https://course-vue.javascript.ru/api/images/5)">-->
-<!--    <div class="meetup-cover" :style="{'&#45;&#45;bg-url': 'https://course-vue.javascript.ru/api/images/5'}">-->
-    <div v-if="meetup.title" class="meetup-cover" :style="{'--bg-url': `${meetup.cover}`}">
+    <div v-if="meetup.title" class="meetup-cover" :style="meetup.coverStyle">
       <h1 class="meetup-cover__title">{{ meetup.title }}</h1>
     </div>
 
