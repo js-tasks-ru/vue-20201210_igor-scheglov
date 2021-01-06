@@ -20,7 +20,7 @@ const getDataOnlyString = (date) => {
   const MM = (date.getUTCMonth() + 1).toString().padStart(2, '0');
   const DD = date.getUTCDay().toString().padStart(2, '0');
   return `${YYYY}-${MM}-${DD}`;
-}
+};
 
 /**
  * Словарь заголовков по умолчанию для всех типов элементов программы
@@ -51,14 +51,13 @@ const agendaItemIcons = {
   other: 'cal-sm',
 };
 
-
 export const app = new Vue({
   el: '#app',
 
   data() {
     return {
       rawMeetup: null,
-    }
+    };
   },
 
   async mounted() {
@@ -67,34 +66,41 @@ export const app = new Vue({
   },
 
   computed: {
-
-    meetup() {
-      if(this.rawMeetup) {
+    meetup: function () {
+      if (this.rawMeetup) {
         return {
           ...this.rawMeetup,
           localDate: new Date(this.rawMeetup.date).toLocaleString(
             navigator.language,
-            {year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-            }
+            {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+            },
           ),
           dateOnlyString: getDataOnlyString(new Date(this.rawMeetup.date)),
-          cover:
-            this.rawMeetup.imageId ?
-            `url(${getMeetupCoverLink(this.rawMeetup)})` :
-            'var(--default-cover)',
+
+          coverStyle: {
+            '--bg-url': this.rawMeetup.imageId
+              ? `url(${getMeetupCoverLink(this.rawMeetup)})`
+              : '',
+          },
+
           agenda: this.rawMeetup.agenda.map(function (agendaItem) {
             return {
               ...agendaItem,
               // icon: agendaItem.type
               icon: agendaItemIcons[agendaItem.type],
-              title: agendaItem.title ? agendaItem.title : agendaItemTitles[agendaItem.type]
-            }
-          })
-        }
+              title: agendaItem.title
+                ? agendaItem.title
+                : agendaItemTitles[agendaItem.type],
+            };
+          }),
+        };
+      } else {
+        return null;
       }
-    }
+    },
 
     // meetupCoverLink() {
     //   return getMeetupCoverLink(this.meetup);
@@ -108,8 +114,7 @@ export const app = new Vue({
 });
 
 async function getMeetup(MEETUP_ID) {
-
-  let url = API_URL + "/meetups/" + MEETUP_ID;
+  let url = API_URL + '/meetups/' + MEETUP_ID;
   let response = await fetch(url);
   let meetupObject = await response.json();
 
