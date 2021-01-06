@@ -44,16 +44,16 @@ export const MeetupsCalendar = {
 
   // Вычислимые свойства помогут как с получением списка дней, так и с выводом информации
   computed: {
-    calYear: function () {
+    calYear() {
       return this.calDate.getUTCFullYear();
     },
-    calMonth: function () {
+    calMonth() {
       return this.calDate.toLocaleString(navigator.language, {
         month: 'long',
       });
     },
 
-    days: function () {
+    days() {
       let days = [];
 
       let firstDayOfMonth = new Date(new Date(this.calDate).setDate(1));
