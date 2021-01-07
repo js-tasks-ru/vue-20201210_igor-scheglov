@@ -5,7 +5,7 @@ export const MeetupAgendaItem = {
 
   template: `<div class="meetup-agenda__item">
       <div class="meetup-agenda__item-col">
-        <img class="icon" alt="icon" :src="iconLink" />
+        <img class="icon" alt="icon" :src="\`/assets/icons/icon-\${icon}.svg\`" />
       </div>
       <div v-if="agendaItem.startsAt || agendaItem.endsAt" class="meetup-agenda__item-col">{{ agendaItem.startsAt}} - {{ agendaItem.endsAt }}</div>
       <div class="meetup-agenda__item-col">
@@ -32,6 +32,11 @@ export const MeetupAgendaItem = {
     iconLink: function () {
       return (
         '/assets/icons/icon-' + agendaItemIcons[this.agendaItem.type] + '.svg'
+      );
+    },
+    icon: function() {
+      return (
+        agendaItemIcons[this.agendaItem.type]
       );
     },
     title: function () {
