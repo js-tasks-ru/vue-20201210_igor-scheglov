@@ -48,10 +48,10 @@ export const MeetupView = {
   },
 
   computed: {
-    link: function () {
+    link() {
       return this.meetup.imageId ? getMeetupCoverLink(this.meetup) : null;
     },
-    dateD: function () {
+    dateD() {
       return new Date(this.meetup.date);
     },
   },

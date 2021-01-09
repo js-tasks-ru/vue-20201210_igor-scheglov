@@ -32,7 +32,7 @@ export const MeetupInfo = {
 
   // computed
   computed: {
-    localDate: function () {
+    localDate() {
       return this.date.toLocaleString(navigator.language, {
         year: 'numeric',
         month: 'long',
@@ -40,7 +40,7 @@ export const MeetupInfo = {
       });
     },
 
-    dateOnlyString: function () {
+    dateOnlyString() {
       const YYYY = this.date.getUTCFullYear();
       const MM = (this.date.getUTCMonth() + 1).toString().padStart(2, '0');
       const DD = this.date.getUTCDay().toString().padStart(2, '0');

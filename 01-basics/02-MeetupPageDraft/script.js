@@ -66,7 +66,7 @@ export const app = new Vue({
   },
 
   computed: {
-    meetup: function () {
+    meetup() {
       if (this.rawMeetup) {
         return {
           ...this.rawMeetup,
