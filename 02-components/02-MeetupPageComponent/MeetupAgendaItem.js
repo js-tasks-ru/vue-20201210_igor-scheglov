@@ -29,17 +29,17 @@ export const MeetupAgendaItem = {
 
   // Возможно, тут потребуется computed
   computed: {
-    iconLink: function () {
+    iconLink() {
       return (
         '/assets/icons/icon-' + agendaItemIcons[this.agendaItem.type] + '.svg'
       );
     },
-    icon: function() {
+    icon() {
       return (
         agendaItemIcons[this.agendaItem.type]
       );
     },
-    title: function () {
+    title() {
       return this.agendaItem.title
         ? this.agendaItem.title
         : agendaItemTitles[this.agendaItem.type];

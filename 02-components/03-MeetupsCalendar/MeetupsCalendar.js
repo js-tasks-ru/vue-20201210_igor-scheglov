@@ -119,12 +119,12 @@ export const MeetupsCalendar = {
 
   // Методы понадобятся для переключения между месяцами
   methods: {
-    plusMonth: function () {
+    plusMonth() {
       this.calDate = new Date(
         this.calDate.setMonth(this.calDate.getMonth() + 1),
       );
     },
-    minusMonth: function () {
+    minusMonth() {
       this.calDate = new Date(
         this.calDate.setMonth(this.calDate.getMonth() - 1),
       );

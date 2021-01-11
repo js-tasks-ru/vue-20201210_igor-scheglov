@@ -15,7 +15,7 @@ export const MeetupCover = {
     },
   },
   computed: {
-    coverStyle: function () {
+    coverStyle() {
       return { '--bg-url': this.link ? `url(${this.link})` : '' };
     },
   },
