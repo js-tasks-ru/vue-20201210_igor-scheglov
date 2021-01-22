@@ -2,19 +2,14 @@
   <div class="toasts">
     <template v-for="message in messages">
       <div
-        v-if="message.type === 'success'"
         :key="message.messageNumber"
-        class="toast toast_success"
+        class="toast"
+        :class="{
+          toast_error: message.type === 'error',
+          toast_success: message.type === 'success',
+        }"
       >
-        <app-icon icon="check-circle" />
-        <span>{{ message.message }}</span>
-      </div>
-      <div
-        v-if="message.type === 'error'"
-        :key="message.messageNumber"
-        class="toast toast_error"
-      >
-        <app-icon icon="alert-circle" />
+        <app-icon :icon="message.toastIcon" />
         <span>{{ message.message }}</span>
       </div>
     </template>
@@ -40,11 +35,20 @@ export default {
 
   methods: {
     error(message) {
-      let messageItem = { message, type: 'error', messageNumber: this.messageNumber++ };
+      let messageItem = {
+        message,
+        type: 'error',
+        toastIcon: 'alert-circle',
+      };
       this.processToast(messageItem);
     },
     success(message) {
-      let messageItem = { message, type: 'success', messageNumber: this.messageNumber++ };
+      let messageItem = {
+        message,
+        type: 'success',
+        messageNumber: this.messageNumber++,
+        toastIcon: 'check-circle',
+      };
       this.processToast(messageItem);
     },
 
@@ -52,7 +56,7 @@ export default {
       this.messages.push(messageItem);
       setTimeout(
         () =>
-          'remove ' + this.messages.splice(this.messages.indexOf(messageItem), 1),
+          this.messages.splice(this.messages.indexOf(messageItem), 1),
         DELAY,
       );
     },

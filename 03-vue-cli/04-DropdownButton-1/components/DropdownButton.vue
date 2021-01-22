@@ -29,6 +29,7 @@
 <script>
 import AppIcon from './AppIcon';
 
+
 export default {
   name: 'DropdownButton',
 
@@ -56,22 +57,24 @@ export default {
   },
 
   computed: {
+    selectedOption() {
+      if (this.options != null && this.value != null) {
+        return this.options.find((val) => {
+          return val.value === this.value;
+        });
+      }
+      return undefined;
+    },
     buttonTitle() {
       let buttonTitle = this.title;
-      if (this.value != null) {
-        let valText = this.options.filter((val) => {
-          return val.value === this.value;
-        })[0].text;
-        buttonTitle += ' - ' + valText;
+      if(this.selectedOption != null) {
+        buttonTitle += ' - ' + this.selectedOption.text;
       }
       return buttonTitle;
     },
     buttonIcon() {
-      if (this.value != null) {
-        let option = this.options.filter((val) => {
-          return val.value === this.value;
-        })[0];
-        return option.icon;
+      if(this.selectedOption != null) {
+        return this.selectedOption.icon;
       }
       return undefined;
     },
@@ -90,6 +93,7 @@ export default {
   },
 
   methods: {
+
     buttonHandler(value) {
       this.showItemsList = false;
       this.$emit('change', value);
