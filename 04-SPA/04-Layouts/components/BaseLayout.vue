@@ -16,15 +16,6 @@ import TheFooter from './TheFooter';
 export default {
   name: 'BaseLayout',
   components: { TheFooter, TheHeader },
-
-  data() {
-    return {
-      layoutComponent: undefined,
-    };
-  },
-  created() {
-    this.layoutComponent = this.$route.meta.layout;
-  },
 };
 </script>
 
