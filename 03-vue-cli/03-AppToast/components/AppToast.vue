@@ -1,18 +1,17 @@
 <template>
   <div class="toasts">
-    <template v-for="message in messages">
-      <div
-        :key="message.messageNumber"
-        class="toast"
-        :class="{
-          toast_error: message.type === 'error',
-          toast_success: message.type === 'success',
-        }"
-      >
-        <app-icon :icon="message.toastIcon" />
-        <span>{{ message.message }}</span>
-      </div>
-    </template>
+    <div
+      v-for="message in messages"
+      :key="message.messageNumber"
+      class="toast"
+      :class="{
+        toast_error: message.type === 'error',
+        toast_success: message.type === 'success',
+      }"
+    >
+      <app-icon :icon="message.toastIcon" />
+      <span>{{ message.message }}</span>
+    </div>
   </div>
 </template>
 
@@ -35,28 +34,23 @@ export default {
 
   methods: {
     error(message) {
-      let messageItem = {
-        message,
-        type: 'error',
-        toastIcon: 'alert-circle',
-      };
-      this.processToast(messageItem);
+      this.processToast(message, 'error', 'alert-circle');
     },
     success(message) {
-      let messageItem = {
-        message,
-        type: 'success',
-        messageNumber: this.messageNumber++,
-        toastIcon: 'check-circle',
-      };
-      this.processToast(messageItem);
+      this.processToast(message, 'success', 'check-circle');
     },
 
-    processToast(messageItem) {
+    processToast(message, type, toastIcon) {
+      let messageItem = {
+        message,
+        type,
+        toastIcon,
+        messageNumber: this.messageNumber++,
+      };
+
       this.messages.push(messageItem);
       setTimeout(
-        () =>
-          this.messages.splice(this.messages.indexOf(messageItem), 1),
+        () => this.messages.splice(this.messages.indexOf(messageItem), 1),
         DELAY,
       );
     },
